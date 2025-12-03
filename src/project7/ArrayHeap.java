@@ -25,6 +25,27 @@ public class ArrayHeap extends ArrayBinaryTree implements Heap {
 
   public void add(Object newKey, Object newElement) throws InvalidObjectException {
       // TODO: add code here
+	  // Code has been added
+	  
+	  //Preprocessing: ensure key matches object type, expand array if needed
+	  //Processing: insert object, increase size
+	  //Postprocessing: bubble up
+
+	  //Preprocessing:
+	  if (!heapComp.isComparable(newKey)) {
+          throw new InvalidObjectException("Key is not comparable by this heap's comparator");
+      }
+      if (size == btArray.length) {
+          expandArray();
+      }
+	  
+	  //Processing:
+	  Item newItem = new Item(newKey, newElement);
+	  btArray[size] = new ArrayPosition(size, newItem);
+	  size++;
+
+	  //Postprocessing:
+	  bubbleUp(size - 1);
       return null;
   }
 
